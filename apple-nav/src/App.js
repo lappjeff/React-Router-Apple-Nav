@@ -1,28 +1,24 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+import { NavWrapper, Nav } from './components'
+
+import { Route } from 'react-router-dom'
+
+import data from './data'
+
+const App = props => {
+  const [items] = useState(data)
+
+  return (
+    <div className="App">
+
+      <Route path='/' render={props => <NavWrapper items={items} {...props} />} />
+
+      <Route path='/:navItemName' render={props => <Nav items={items} {...props} />} />
+
+    </div>
+  );
 }
 
 export default App;
